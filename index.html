@@ -255,6 +255,16 @@
     .hdr{padding:13px 18px;}
     #screen-question{padding:84px 14px 44px;}
   }
+
+  .field-group { width:100%; max-width:420px; margin-bottom:12px; }
+  .field-group input {
+    width:100%; padding:13px 16px; font-family:'Poppins',sans-serif;
+    font-size:14px; color:#fff; background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.12); border-radius:10px;
+    outline:none; transition:border 0.2s;
+  }
+  .field-group input::placeholder { color:rgba(255,255,255,0.3); }
+  .field-group input:focus { border-color:var(--pink); }
 </style>
 </head>
 <body>
@@ -280,6 +290,8 @@
     <span class="vtag">Be Fast</span>
     <span class="vtag">Collaborate &amp; Learn</span>
   </div>
+  <div class="field-group"><input type="text" id="input-nome" placeholder="Seu nome completo" /></div>
+  <div class="field-group"><input type="email" id="input-email" placeholder="Seu e-mail" /></div>
   <button class="btn-p" onclick="startTest()">Iniciar teste →</button>
   <div class="intro-sub">~8 minutos &middot; 10 perguntas</div>
 </div>
@@ -396,9 +408,12 @@ const QS=[
    w:[3,2,1,0]}
 ];
 
-let cur=0,ans=[],sel=null;
+let cur=0,ans=[],sel=null,userName='',userEmail='';
 
 function startTest(){
+  userName = document.getElementById('input-nome').value.trim();
+  userEmail = document.getElementById('input-email').value.trim();
+  if(!userName || !userEmail){ alert('Por favor, preencha seu nome e e-mail para continuar.'); return; }
   document.getElementById('screen-intro').classList.remove('active');
   document.getElementById('screen-question').classList.add('active');
   renderQ();
@@ -476,6 +491,46 @@ function showThanks(){
     card.innerHTML+=`<div class="s-row"><div class="s-dot"></div><div class="s-txt"><b>${val}:</b> ${posComment(val,pct)}</div></div>`;
   });
   sendSlack(sc);
+  sendAirtable(sc);
+}
+
+async function sendAirtable(sc){
+  const AIRTABLE_TOKEN = 'patKU8YmNInYWXiyM.335b953daa2859f6af37e05ff161c2454a3f7268d5a31f24079eb30d06684833';
+  const BASE_ID = 'apps8W8uoeHsjM1Qi';
+  const TABLE_ID = 'tblaaz7qLlH2vf1cL';
+
+  const pct = sc.pct;
+  const verdict = pct>=75 ? 'Alta aderência' : pct>=50 ? 'Aderência moderada' : 'Tensão cultural significativa';
+
+  const fields = {
+    'Nome': userName,
+    'Email': userEmail,
+    'Data/Hora': new Date().toISOString(),
+    'Score Geral (%)': pct,
+    'Classificação': verdict,
+  };
+
+  Object.entries(sc.bv).forEach(([val, v]) => {
+    fields['Score — ' + val + ' (%)'] = Math.round(v.g / v.m * 100);
+  });
+
+  ans.forEach((a, i) => {
+    const n = String(i+1).padStart(2,'0');
+    fields['Situação ' + n + ' — Resposta'] = QS[i].o[a.o].substring(0, 255);
+  });
+
+  try {
+    await fetch('https://api.airtable.com/v0/' + BASE_ID + '/' + TABLE_ID, {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + AIRTABLE_TOKEN,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ fields })
+    });
+  } catch(e) {
+    console.error('Airtable error:', e);
+  }
 }
 
 async function sendSlack(sc){
