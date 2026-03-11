@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fintalk — Cultura & Fit</title>
+<title>Fintalk: Cultura & Fit</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -281,7 +281,7 @@
 <div class="screen active" id="screen-intro">
   <div class="eyebrow">People &middot; Processo Seletivo</div>
   <div class="intro-h1">Teste de<br><em>Fit Cultural</em></div>
-  <p class="intro-p">10 situações reais de uma startup em crescimento. Não existe resposta certa ou errada — suas escolhas dizem muito sobre como você trabalha.</p>
+  <p class="intro-p">10 situações reais de uma startup em crescimento. Não existe resposta certa ou errada. Suas escolhas dizem muito sobre como você trabalha.</p>
   <p class="intro-note">Responda com honestidade, não com o que parece "mais adequado". O teste reconhece respostas estratégicas.</p>
   <div class="vwrap">
     <span class="vtag">Customer Obsession</span>
@@ -303,7 +303,7 @@
     <div class="q-track"><div class="q-bar" id="q-bar" style="width:0%"></div></div>
   </div>
   <div class="q-body">
-    <div class="q-lbl" id="q-lbl">—</div>
+    <div class="q-lbl" id="q-lbl"></div>
     <div class="q-txt" id="q-txt"></div>
     <div class="q-ctx" id="q-ctx"></div>
     <div class="opts" id="opts"></div>
@@ -327,23 +327,23 @@
 <script>
 const QS=[
   {v:"Customer Obsession",l:"Situação 01",
-   q:"Você está entregando uma melhoria que o cliente pediu. No meio do processo, percebe que o pedido resolve o sintoma — mas não a causa real. O prazo é amanhã.",
+   q:"Você está entregando uma melhoria que o cliente pediu. No meio do processo, percebe que o pedido resolve o sintoma, mas não a causa real. O prazo é amanhã.",
    c:"O cliente validou o escopo. O time de CS quer fechar. Seu líder disse 'entrega o que foi combinado'. Você tem 20 minutos para decidir.",
    o:["Implementa uma versão levemente modificada que ataca o problema real, sem comunicar a mudança.",
       "Entrega o que foi combinado. O cliente aprovou, o prazo é real, e você não tem autoridade para mudar o escopo.",
-      "Abre uma conversa rápida com o cliente ainda hoje, apresenta o que identificou e deixa a decisão com ele — mesmo que atrase.",
+      "Abre uma conversa rápida com o cliente ainda hoje, apresenta o que identificou e deixa a decisão com ele, mesmo que atrase.",
       "Entrega, mas inclui no relatório sua análise e o que faria diferente."],
    w:[0,1,3,2]},
   {v:"Founder Mode",l:"Situação 02",
    q:"Você identifica um problema operacional real impactando a empresa. Não é da sua área, não está no seu job description, e ninguém pediu para você resolver.",
-   c:"Resolver vai tomar tempo. Você não vai receber crédito. Há quem seja formalmente responsável — mas não está agindo.",
+   c:"Resolver vai tomar tempo. Você não vai receber crédito. Há quem seja formalmente responsável, mas não está agindo.",
    o:["Documenta com uma proposta de solução e envia ao líder aguardando instrução.",
       "Ignora. Existe alguém responsável e meter a mão em outra área cria ruído.",
       "Alerta a pessoa responsável e se coloca disponível para ajudar, sem assumir o problema.",
-      "Resolve ou inicia a resolução. O problema existia, você viu — isso já é suficiente para agir."],
+      "Resolve ou inicia a resolução. O problema existia, você viu. Isso já é suficiente para agir."],
    w:[1,0,2,3]},
   {v:"Tough Talks",l:"Situação 03",
-   q:"Numa reunião, um colega apresenta uma análise que vai embasar uma decisão importante. Você percebe uma premissa central equivocada — e o time aprovou sem questionar.",
+   q:"Numa reunião, um colega apresenta uma análise que vai embasar uma decisão importante. Você percebe uma premissa central equivocada, e o time aprovou sem questionar.",
    c:"Seu colega é experiente, está empolgado, e você tem boa relação com ele. Levantar isso agora vai gerar desconforto.",
    o:["Não fala nada. O time validou e talvez você esteja vendo algo que os outros não estão.",
       "Questiona a premissa na reunião, de forma direta e respeitosa, antes que a decisão seja tomada.",
@@ -351,18 +351,18 @@ const QS=[
       "Faz uma pergunta aberta que aponta para o problema sem afirmar que ele errou."],
    w:[0,3,2,1]},
   {v:"Be Fast",l:"Situação 04",
-   q:"É sexta à tarde. Um cliente importante reportou um bug crítico. Você tem uma correção pronta, mas ela está 75% testada. Implementar agora resolve o problema — mas se algo falhar, não haverá suporte até segunda.",
+   q:"É sexta à tarde. Um cliente importante reportou um bug crítico. Você tem uma correção pronta, mas ela está 75% testada. Implementar agora resolve o problema, mas se algo falhar, não haverá suporte até segunda.",
    c:"O cliente está impactado desde ontem. A correção parece sólida, mas o ambiente de produção tem variáveis não testadas. O time já fechou o dia.",
-   o:["Implementa agora com monitoramento ativo — o cliente já está impactado e esperar 3 dias é pior.",
+   o:["Implementa agora com monitoramento ativo: o cliente já está impactado e esperar 3 dias é pior.",
       "Espera até segunda com o time completo. Não vale o risco de piorar numa sexta.",
       "Implementa uma versão parcial que resolve o impacto mais crítico com menor risco.",
       "Escala para o líder. Com o time fechado, você não quer tomar esse chamado sozinho."],
    w:[3,0,2,1]},
   {v:"Collaborate & Learn",l:"Situação 05",
-   q:"Você desenvolveu um método que te faz resolver em 2h o que colegas levam 6h. Compartilhá-lo não traz benefício direto — e reduz sua vantagem comparativa.",
+   q:"Você desenvolveu um método que te faz resolver em 2h o que colegas levam 6h. Compartilhá-lo não traz benefício direto, e reduz sua vantagem comparativa.",
    c:"Ninguém vai pedir. A empresa ganharia se todos soubessem. Você investiu tempo desenvolvendo isso.",
    o:["Mantém para si. Você investiu tempo e esse diferencial é legítimo.",
-      "Compartilha partes — o suficiente para ajudar, mas mantendo o que te diferencia.",
+      "Compartilha partes: o suficiente para ajudar, mas mantendo o que te diferencia.",
       "Compartilha se alguém perguntar. Não vai esconder, mas também não oferece proativamente.",
       "Compartilha sem que ninguém peça. Um time mais forte supera qualquer vantagem individual."],
    w:[0,0,1,3]}
@@ -430,11 +430,11 @@ function calcScores(){
 
 function posComment(val,pct){
   const m={
-    'Customer Obsession':['Atenção ao que o cliente pede e compromisso com as entregas combinadas.','Equilibra execução com leitura do contexto real do cliente.','Vai além do pedido — busca resolver o problema real, não apenas o sintoma.'],
+    'Customer Obsession':['Atenção ao que o cliente pede e compromisso com as entregas combinadas.','Equilibra execução com leitura do contexto real do cliente.','Vai além do pedido: busca resolver o problema real, não apenas o sintoma.'],
     'Founder Mode':['Foco em entregas dentro dos prazos estabelecidos.','Capricho com o resultado e senso de responsabilidade com a entrega.','Padrão interno de qualidade independente do que outros percebem.'],
     'Tough Talks':['Postura cuidadosa e reflexiva antes de se posicionar.','Consegue ser direto quando necessário, com sensibilidade para o momento.','Coragem de falar o que precisa ser dito, na hora certa, com respeito.'],
     'Be Fast':['Prudência e análise antes de agir em cenários de risco.','Boa tolerância à ambiguidade com capacidade de ação em contextos incertos.','Age com coragem em cenários incompletos e se responsabiliza pelo raciocínio.'],
-    'Collaborate & Learn':['Respeita o espaço de aprendizado individual dos colegas.','Disponível para colaborar equilibrando com suas próprias demandas.','Coloca o time acima do ganho individual — compartilha proativamente.']
+    'Collaborate & Learn':['Respeita o espaço de aprendizado individual dos colegas.','Disponível para colaborar equilibrando com suas próprias demandas.','Coloca o time acima do ganho individual e compartilha proativamente.']
   };
   return m[val][pct>=75?2:pct>=40?1:0];
 }
