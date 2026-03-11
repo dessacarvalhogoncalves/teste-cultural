@@ -293,7 +293,7 @@
   <div class="field-group"><input type="text" id="input-nome" placeholder="Seu nome completo" /></div>
   <div class="field-group"><input type="email" id="input-email" placeholder="Seu e-mail" /></div>
   <button class="btn-p" onclick="startTest()">Iniciar teste →</button>
-  <div class="intro-sub">~8 minutos &middot; 10 perguntas</div>
+  <div class="intro-sub">~4 minutos &middot; 5 situações</div>
 </div>
 
 <!-- QUESTION -->
@@ -329,83 +329,43 @@ const QS=[
   {v:"Customer Obsession",l:"Situação 01",
    q:"Você está entregando uma melhoria que o cliente pediu. No meio do processo, percebe que o pedido resolve o sintoma — mas não a causa real. O prazo é amanhã.",
    c:"O cliente validou o escopo. O time de CS quer fechar. Seu líder disse 'entrega o que foi combinado'. Você tem 20 minutos para decidir.",
-   o:["Entrega o que foi combinado. O cliente aprovou, o prazo é real, e você não tem autoridade para mudar o escopo.",
+   o:["Implementa uma versão levemente modificada que ataca o problema real, sem comunicar a mudança.",
+      "Entrega o que foi combinado. O cliente aprovou, o prazo é real, e você não tem autoridade para mudar o escopo.",
       "Abre uma conversa rápida com o cliente ainda hoje, apresenta o que identificou e deixa a decisão com ele — mesmo que atrase.",
-      "Entrega, mas inclui no relatório sua análise e o que faria diferente.",
-      "Implementa uma versão levemente modificada que ataca o problema real, sem comunicar a mudança."],
-   w:[1,3,2,0]},
+      "Entrega, mas inclui no relatório sua análise e o que faria diferente."],
+   w:[0,1,3,2]},
   {v:"Founder Mode",l:"Situação 02",
-   q:"Você terminou 90% de uma entrega importante. O restante representa 20% da qualidade final. Faltam 2 horas para o prazo — e ninguém além de você vai perceber essa diferença.",
-   c:"O time já fechou o dia. O cliente nunca viu seu benchmark interno de qualidade. Você tem outros projetos esperando.",
-   o:["Entrega como está. 90% no prazo tem mais valor do que 100% com atraso — e o cliente vai ficar satisfeito.",
-      "Usa as 2 horas para puxar ao máximo dentro do prazo, no limite do que consegue.",
-      "Entrega no prazo e agenda uma revisão com o cliente para uma versão 1.1.",
-      "Pede mais um dia. Prefere um desconforto com o prazo a entregar algo que não te representa."],
-   w:[0,3,2,1]},
+   q:"Você identifica um problema operacional real impactando a empresa. Não é da sua área, não está no seu job description, e ninguém pediu para você resolver.",
+   c:"Resolver vai tomar tempo. Você não vai receber crédito. Há quem seja formalmente responsável — mas não está agindo.",
+   o:["Documenta com uma proposta de solução e envia ao líder aguardando instrução.",
+      "Ignora. Existe alguém responsável e meter a mão em outra área cria ruído.",
+      "Alerta a pessoa responsável e se coloca disponível para ajudar, sem assumir o problema.",
+      "Resolve ou inicia a resolução. O problema existia, você viu — isso já é suficiente para agir."],
+   w:[1,0,2,3]},
   {v:"Tough Talks",l:"Situação 03",
    q:"Numa reunião, um colega apresenta uma análise que vai embasar uma decisão importante. Você percebe uma premissa central equivocada — e o time aprovou sem questionar.",
    c:"Seu colega é experiente, está empolgado, e você tem boa relação com ele. Levantar isso agora vai gerar desconforto.",
-   o:["Questiona a premissa na reunião, de forma direta e respeitosa, antes que a decisão seja tomada.",
+   o:["Não fala nada. O time validou e talvez você esteja vendo algo que os outros não estão.",
+      "Questiona a premissa na reunião, de forma direta e respeitosa, antes que a decisão seja tomada.",
       "Não fala nada na reunião, mas conversa com ele no privado depois.",
-      "Faz uma pergunta aberta que aponta para o problema sem afirmar que ele errou.",
-      "Não fala nada. O time validou e talvez você esteja vendo algo que os outros não estão."],
-   w:[3,2,1,0]},
+      "Faz uma pergunta aberta que aponta para o problema sem afirmar que ele errou."],
+   w:[0,3,2,1]},
   {v:"Be Fast",l:"Situação 04",
-   q:"Surge a oportunidade de implementar uma melhoria operacional significativa. Você tem 40% das informações ideais. A janela de ação é de 24 horas.",
-   c:"Se der errado, o impacto será visível. Se der certo, o ganho é real. Esperar mais fecha a janela.",
-   o:["Age com o raciocínio documentado — se der errado, quer poder explicar por que tomou aquela decisão.",
-      "Age na metade da escala: captura aprendizado com menor exposição ao risco.",
-      "Escala para o líder. Com tão pouca informação, a responsabilidade não deve ser só sua.",
-      "Espera. Agir com 40% de informação em algo de impacto visível é imprudente."],
-   w:[3,2,1,0]},
+   q:"É sexta à tarde. Um cliente importante reportou um bug crítico. Você tem uma correção pronta, mas ela está 75% testada. Implementar agora resolve o problema — mas se algo falhar, não haverá suporte até segunda.",
+   c:"O cliente está impactado desde ontem. A correção parece sólida, mas o ambiente de produção tem variáveis não testadas. O time já fechou o dia.",
+   o:["Implementa agora com monitoramento ativo — o cliente já está impactado e esperar 3 dias é pior.",
+      "Espera até segunda com o time completo. Não vale o risco de piorar numa sexta.",
+      "Implementa uma versão parcial que resolve o impacto mais crítico com menor risco.",
+      "Escala para o líder. Com o time fechado, você não quer tomar esse chamado sozinho."],
+   w:[3,0,2,1]},
   {v:"Collaborate & Learn",l:"Situação 05",
    q:"Você desenvolveu um método que te faz resolver em 2h o que colegas levam 6h. Compartilhá-lo não traz benefício direto — e reduz sua vantagem comparativa.",
    c:"Ninguém vai pedir. A empresa ganharia se todos soubessem. Você investiu tempo desenvolvendo isso.",
-   o:["Compartilha sem que ninguém peça. Um time mais forte supera qualquer vantagem individual.",
-      "Compartilha se alguém perguntar. Não vai esconder, mas também não oferece proativamente.",
+   o:["Mantém para si. Você investiu tempo e esse diferencial é legítimo.",
       "Compartilha partes — o suficiente para ajudar, mas mantendo o que te diferencia.",
-      "Mantém para si. Você investiu tempo e esse diferencial é legítimo."],
-   w:[3,1,0,0]},
-  {v:"Tough Talks",l:"Situação 06",
-   q:"Você já falou uma vez com seu líder sobre uma decisão que acredita ser equivocada. Ele ouviu, considerou e manteve a posição. O projeto começa em 3 dias.",
-   c:"Você continua convicto. Insistir pode parecer falta de confiança. Calar pode custar caro.",
-   o:["Pede 15 minutos, apresenta os pontos sem resposta — e aceita a decisão final, qualquer que seja.",
-      "Registra sua posição por escrito antes do início, sem escalar.",
-      "Aceita. Ele ouviu sua visão e decidiu — isso é suficiente para se comprometer com a execução.",
-      "Escala para o nível acima. Você não pode se comprometer com algo que vai prejudicar o resultado."],
-   w:[3,2,1,0]},
-  {v:"Be Fast",l:"Situação 07",
-   q:"Você agiu rápido numa decisão que parecia sólida. Deu errado. O impacto é visível para o time e o cliente. Ninguém perguntou de onde veio o problema.",
-   c:"Você sabe que foi sua decisão. Assumir agora é desconfortável. Deixar passar pode ser invisível por um tempo.",
-   o:["Assume proativamente, explica o raciocínio e já apresenta o que vai fazer diferente.",
-      "Fala com o time internamente, mas não menciona ao cliente para não abalar a confiança.",
-      "Menciona que 'houve um erro no processo', sem personalizar a responsabilidade.",
-      "Espera ser questionado. Se ninguém perguntar a origem, não cria problema onde não existe."],
-   w:[3,1,0,0]},
-  {v:"Customer Obsession",l:"Situação 08",
-   q:"Você tem quase certeza de que uma entrega prometida ao cliente não vai sair no prazo. Ainda há uma pequena chance de que dê tempo.",
-   c:"Avisar agora pode gerar cancelamento. Esperar dá uma chance real de entregar. Mas se não der, o cliente recebe atraso e surpresa juntos.",
-   o:["Avisa o cliente agora, explica o contexto com honestidade e apresenta um plano alternativo.",
-      "Trabalha fora do horário para tentar entregar. Só avisa se realmente não der.",
-      "Manda uma mensagem neutra: 'pode haver um pequeno ajuste no prazo' — sem detalhar.",
-      "Espera. Ainda há chance de entregar. Não vai criar alarme sem necessidade."],
-   w:[3,2,1,0]},
-  {v:"Founder Mode",l:"Situação 09",
-   q:"Você identifica um problema operacional real impactando a empresa. Não é da sua área, não está no seu job description, e ninguém pediu para você resolver.",
-   c:"Resolver vai tomar tempo. Você não vai receber crédito. Há quem seja formalmente responsável — mas não está agindo.",
-   o:["Resolve ou inicia a resolução. O problema existia, você viu — isso já é suficiente para agir.",
-      "Alerta a pessoa responsável e se coloca disponível para ajudar, sem assumir o problema.",
-      "Documenta com uma proposta de solução e envia ao líder aguardando instrução.",
-      "Ignora. Existe alguém responsável e meter a mão em outra área cria ruído."],
-   w:[3,2,1,0]},
-  {v:"Collaborate & Learn",l:"Situação 10",
-   q:"Você percebe que um colega está travado num problema que você já resolveu antes. Ajudá-lo vai tomar pelo menos 2 horas de um dia já cheio.",
-   c:"Você não foi chamado. Ele vai resolver por conta própria eventualmente — só vai demorar mais. Você tem seus próprios prazos.",
-   o:["Manda uma mensagem rápida: 'vi que você está no problema X, já passei por isso — me chama se quiser trocar ideia'.",
-      "Para o que está fazendo e vai até ele imediatamente.",
-      "Termina o que está fazendo primeiro e depois vai até ele, se ainda precisar.",
-      "Não interfere. Ele vai resolver e aprender mais sozinho. E você precisa do seu tempo."],
-   w:[3,2,1,0]}
+      "Compartilha se alguém perguntar. Não vai esconder, mas também não oferece proativamente.",
+      "Compartilha sem que ninguém peça. Um time mais forte supera qualquer vantagem individual."],
+   w:[0,0,1,3]}
 ];
 
 let cur=0,ans=[],sel=null,userName='',userEmail='';
@@ -421,9 +381,9 @@ function startTest(){
 
 function renderQ(){
   const q=QS[cur];
-  document.getElementById('q-cnt').textContent=String(cur+1).padStart(2,'0')+' / 10';
-  document.getElementById('hdr-badge').textContent=String(cur+1).padStart(2,'0')+' / 10';
-  document.getElementById('q-bar').style.width=(cur/10*100)+'%';
+  document.getElementById('q-cnt').textContent=String(cur+1).padStart(2,'0')+' / 05';
+  document.getElementById('hdr-badge').textContent=String(cur+1).padStart(2,'0')+' / 05';
+  document.getElementById('q-bar').style.width=(cur/5*100)+'%';
   document.getElementById('q-lbl').textContent=q.l;
   document.getElementById('q-txt').textContent=q.q;
   document.getElementById('q-ctx').textContent=q.c;
@@ -439,7 +399,7 @@ function renderQ(){
   sel=null;
   const nb=document.getElementById('btn-nxt');
   nb.classList.remove('show');
-  nb.textContent=cur===9?'Finalizar →':'Continuar →';
+  nb.textContent=cur===4?'Finalizar →':'Continuar →';
   const body=document.querySelector('.q-body');
   body.style.animation='none'; body.offsetHeight; body.style.animation='up 0.38s ease';
 }
@@ -453,7 +413,7 @@ function pick(i,btn){
 function advance(){
   if(sel===null)return;
   ans.push({q:cur,o:sel}); cur++;
-  if(cur<10)renderQ(); else showThanks();
+  if(cur<5)renderQ(); else showThanks();
 }
 
 function calcScores(){
@@ -516,7 +476,7 @@ async function sendAirtable(sc){
 
   ans.forEach((a, i) => {
     const n = String(i+1).padStart(2,'0');
-    fields['Situação ' + n + ' — Resposta'] = QS[i].o[a.o].substring(0, 255);
+    fields['Situação 0' + (i+1) + ' — Resposta'] = QS[i].o[a.o].substring(0, 255);
   });
 
   try {
