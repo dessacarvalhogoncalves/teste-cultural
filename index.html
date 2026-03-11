@@ -431,13 +431,13 @@ function calcScores(){
 
 function posComment(val,pct){
   const m={
-    'Customer Obsession':['Atenção ao que o cliente pede e compromisso com as entregas combinadas.','Equilibra execução com leitura do contexto real do cliente.','Vai além do pedido: busca resolver o problema real, não apenas o sintoma.'],
-    'Founder Mode':['Foco em entregas dentro dos prazos estabelecidos.','Capricho com o resultado e senso de responsabilidade com a entrega.','Padrão interno de qualidade independente do que outros percebem.'],
+    'Customer Obsession · Be Fast':['Tende a priorizar velocidade, mesmo que isso signifique menos transparência com o cliente.','Equilibra entrega rápida com honestidade, mas ainda busca o caminho de menor atrito.','Combina velocidade e transparência: coloca o cliente no centro da decisão sem abrir mão do prazo.'],
+    'Tough Talks · Founder Mode':['Prefere executar sem conflito, mesmo quando vê um problema claro.','Consegue sinalizar discordâncias, mas recua antes de documentar ou propor revisão.','Executa com ownership e não engole o desacordo: fala, registra e segue sem travar.'],
     'Tough Talks':['Postura cuidadosa e reflexiva antes de se posicionar.','Consegue ser direto quando necessário, com sensibilidade para o momento.','Coragem de falar o que precisa ser dito, na hora certa, com respeito.'],
     'Be Fast':['Prudência e análise antes de agir em cenários de risco.','Boa tolerância à ambiguidade com capacidade de ação em contextos incertos.','Age com coragem em cenários incompletos e se responsabiliza pelo raciocínio.'],
     'Collaborate & Learn':['Respeita o espaço de aprendizado individual dos colegas.','Disponível para colaborar equilibrando com suas próprias demandas.','Coloca o time acima do ganho individual e compartilha proativamente.']
   };
-  return m[val][pct>=75?2:pct>=40?1:0];
+  return m[val] ? m[val][pct>=75?2:pct>=40?1:0] : '';
 }
 
 function showThanks(){
@@ -471,8 +471,16 @@ async function sendAirtable(sc){
     'Classificação': verdict,
   };
 
+  const valMap = {
+    'Customer Obsession · Be Fast': 'Customer Obsession',
+    'Tough Talks · Founder Mode': 'Founder Mode',
+    'Tough Talks': 'Tough Talks',
+    'Be Fast': 'Be Fast',
+    'Collaborate & Learn': 'Collaborate & Learn'
+  };
   Object.entries(sc.bv).forEach(([val, v]) => {
-    fields['Score — ' + val + ' (%)'] = Math.round(v.g / v.m * 100);
+    const label = valMap[val] || val;
+    fields['Score — ' + label + ' (%)'] = Math.round(v.g / v.m * 100);
   });
 
   ans.forEach((a, i) => {
