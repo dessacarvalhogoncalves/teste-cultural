@@ -78,11 +78,12 @@
 
   /* ─── HEADER ─── */
   .hdr {
-    position:fixed; top:0; left:0; right:0; z-index:100;
+    position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:100;
+    width:calc(100% - 48px); max-width:1200px;
     display:flex; align-items:center; justify-content:space-between;
-    padding:15px 48px;
-    background:rgba(8,8,16,0.88); backdrop-filter:blur(22px);
-    border-bottom:1px solid var(--border);
+    padding:13px 32px;
+    background:rgba(20,20,32,0.85); backdrop-filter:blur(22px);
+    border-radius:16px; border:1px solid var(--border2);
   }
   .hdr-logo {
     height:25px; width:auto;
@@ -252,7 +253,7 @@
   @keyframes ld { 0%,80%,100%{opacity:0.2;transform:scale(0.8)} 40%{opacity:1;transform:scale(1)} }
 
   @media(max-width:480px){
-    .hdr{padding:13px 18px;}
+    .hdr{padding:13px 18px; width:calc(100% - 24px);}
     #screen-question{padding:84px 14px 44px;}
   }
 
